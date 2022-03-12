@@ -3,9 +3,9 @@ package com.cm6123.wormhole.app;
 import com.cm6123.wormhole.dice.Dice;
 import com.cm6123.wormhole.player.Player;
 import com.cm6123.wormhole.board.Board;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public final class Application {
     public static void main(final String[] args) {
@@ -30,7 +30,33 @@ public final class Application {
                         System.out.println("Board width needs to be between 3 and 10");
                     }
                 } catch (Exception e) {
-                    System.out.println("Thank you");
+                    System.out.println("Numbers only");
+                    System.out.println("Press Enter ");
+                    sc.nextLine();
+                }
+            }
+
+            System.out.println("Thank you.");
+            Board bd = new Board(BoardWidth);
+            bd.WormholesGenerator(BoardWidth);
+            bd.ExitGenerator(BoardWidth);
+            System.out.println("This Board has " + BoardWidth * BoardWidth + " squares.");
+            bd.getWormholes();
+            bd.getExits();
+
+            int NumOfPlayers;
+            while(true){
+                try{
+                    System.out.println("Please enter the number of players: ");
+                    NumOfPlayers = Integer.parseInt(sc.nextLine());
+                    if(NumOfPlayers >= 2 && NumOfPlayers <= 6){
+                        break;
+                    }
+                    else{
+                        System.out.println("Number needs to be between 2 and 6");
+                    }
+                } catch (Exception e){
+                    System.out.println("Numbers only");
                 }
             }
         }

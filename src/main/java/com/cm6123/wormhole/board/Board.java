@@ -102,7 +102,7 @@ public class Board {
     }
 
     public int[] getWormholes(){
-        return getWormholes();
+        return wormholes;
     }
 
     public int[] getExits(){
