@@ -14,10 +14,10 @@ public final class Application {
     private static int width;
 
     private Application() {
-        CharSequence args = null;
-        logger.info("Application Started with args:{}",
-                String.join(".", args));
-        Scanner sc = new Scanner(System.in);
+        public static void main;( final String[] args){
+            logger.info("Application Started with args:{}",
+                    String.join(".", args));
+            Scanner sc = new Scanner(System.in);
             System.out.println("Welcome to Wormhole! \n " +
                     "Rules: \n" +
                     "~ 2 to 6 players allowed \n" +
@@ -29,3 +29,4 @@ public final class Application {
             int width = sc.nextInt();
         }
     }
+}
