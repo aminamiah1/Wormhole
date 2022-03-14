@@ -10,7 +10,7 @@ public class Player {
     public int position;
 
     public Player(){
-        name = "";
+        name = " ";
         position = 1;
         AutoRoll = 0;
     }
