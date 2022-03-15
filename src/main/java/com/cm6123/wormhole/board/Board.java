@@ -1,111 +1,71 @@
 package com.cm6123.wormhole.board;
-import com.cm6123.wormhole.dice.Dice;
 
 import java.util.ArrayList;
-import java.util.Random;
+import java.util.Collections;
+import java.util.List;
 
 public class Board {
-    private final ArrayList<Integer> LayoutOfBoard = new
-            ArrayList<Integer>();
-    private final ArrayList<Integer> Position = new
-            ArrayList<Integer>();
-    private int BoardSize = 0;
 
-    private int[] wormholes;
-    private int[] exit;
+    private Integer BoardSize;
+    private List<Integer> wormholeEntrances;
+    private List<Integer> wormholeExits;
 
-    public Board(final int BoardSize) {
-        this.BoardSize = BoardSize;
-        for (int index = 0; index < (this.BoardSize * this.BoardSize); index++) {
-            LayoutOfBoard.add(index + 1);
+
+    public Board(final Integer size) {
+        if (size >= 5 & size <= 10){
+            this.BoardSize = size;
+        }else{
+            throw new ArithmeticException("Invalid board width: can only be between 5 and 10");
         }
     }
 
-    public ArrayList<Integer> getLayoutOfBoard() {
-        return LayoutOfBoard;
+    public List<Integer> getWormholeEntrances() {
+        return wormholeEntrances;
     }
 
-    public int[] AutoDiceRoll() {
-        Random rd = new Random();
-        int RandomInt1 = rd.nextInt(6);
-        int RandomInt2 = rd.nextInt(6);
-        if (RandomInt1 == 0) {
-            RandomInt1++;
-        }
-        if (RandomInt2 == 0){
-            RandomInt2++;
-        }
-        int[] DiceNum = new int[2];
-        DiceNum[0] = RandomInt1;
-        DiceNum[1] = RandomInt2;
-        return DiceNum;
+    public List<Integer> getWormholeExits() {
+        return wormholeExits;
     }
 
-    public void WormholesGenerator (final int width){
-        Random rd = new Random();
-        int temp = 0;
-        wormholes = new int[width];
-        for (int i = 0; i < width; i++){
-            temp = 0;
+    public void setWormholes() {
 
-            while (temp == 0 || temp == 1 || Position.contains(temp)){
-                temp = rd.nextInt(width * width);
-            }
-            wormholes[i] = temp;
-            Position.add(temp);
-        }
-    }
+        /* initialise wormhole lists */
 
-    public void ExitGenerator(final int width){
-        Random rd = new Random();
-        int temp = 0;
-        exit = new int[width];
-        for (int i =0; i < width; i++){
-            temp = 0;
-            while(temp == 0|| temp == 1|| Position.contains(temp)){
-                temp = rd.nextInt(width * width);
-            }
-            exit[i] = temp;
-            Position.add(temp);
-        }
-    }
+        this.wormholeEntrances = new ArrayList<Integer>();
+        this.wormholeExits = new ArrayList<Integer>();
 
-    public void GetWormholes(){
-        System.out.println("Wormholes: ");
-        for (int i = 0; i < BoardSize; i++){
-            System.out.println(wormholes[i] + " ");
-        }
-        System.out.println(" ");
-    }
+        /* generate potenial positions */
 
-    public void getExit(){
-        System.out.print("Exit: ");
-        for (int i = 0; i < BoardSize; i++){
-            System.out.print(exit[i] + " ");
-        }
-        System.out.println(" ");
-    }
+        List<Integer> BoardPosition = new ArrayList<Integer>();
 
-    public int ChecksWormhole(final int pos){
-        for (int i: wormholes){
-            if (pos == i){
-                Random rd = new Random();
-                int index = rd.nextInt(wormholes.length);
-                System.out.println("wormhole at " + i);
-
-                System.out.println("Exit at " + exit[index]);
-                return exit[index];
-            }
+        for (int i = 2; i < (this.BoardSize * this.BoardSize); i++) {
+            BoardPosition.add(i);
         }
 
-        return pos;
+        Collections.shuffle(BoardPosition);
+
+        for (int i = 1; i < (this.BoardSize * 2); i = i + 2) {
+            this.wormholeEntrances.add(BoardPosition.get(i));
+            this.wormholeExits.add(BoardPosition.get(i + 1));
+        }
+
     }
 
-    public int[] getWormholes(){
-        return wormholes;
+    public Integer getRandomExit() {
+        Double randomNumber = (Math.ceil(Math.random() * this.BoardSize - 1));
+        Integer randomExit = this.wormholeExits.get(randomNumber.intValue());
+        return randomExit;
     }
 
-    public int[] getExits(){
-        return exit;
+    public Integer getTotalPositions(){
+        return this.BoardSize * this.BoardSize;
+    }
+
+
+    public boolean isWormhole(final Integer position) {
+        if (getWormholeEntrances().contains(position)) {
+            return true;
+        }
+        return false;
     }
 }
