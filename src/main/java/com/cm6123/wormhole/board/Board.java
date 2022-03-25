@@ -2,70 +2,124 @@ package com.cm6123.wormhole.board;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
+import java.util.Random;
 
 public class Board {
+    /**
+     * This is board size and list of wormhole entrances and exits.
+     */
+    private final int boardSize;
+    /**
+     * This is board width.
+     */
+    private final int boardWidth;
+    /**
+     * This array stores the positive wormhole entrances.
+     */
+    private final ArrayList<Integer> wormholeEntrancesP = new ArrayList<Integer>();
 
-    private Integer BoardSize;
-    private List<Integer> wormholeEntrances;
-    private List<Integer> wormholeExits;
+    /**
+     * This array stores negative wormhole entrances.
+     */
+    private final ArrayList<Integer> wormholeEntrancesN = new ArrayList<Integer>();
+    /**
+     * This array stores the wormhole exits.
+     */
+    private final ArrayList<Integer> wormholeExits = new ArrayList<Integer>();
+    /**
+     * This is board size and list of wormhole entrances and exits.
+     */
+    private final ArrayList<Integer> coin = new ArrayList<Integer>();
+    /**
+     * This string goes inside a hashmap because the pN changes from positive to negative.
+     */
+    private String pN;
+    /**
+     * Randomises wormholes.
+     */
+    private Random rdm = new Random();
 
+    /**
+     * creates board.
+     *
+     * @param userBoard
+     */
+    public Board(final int userBoard) {
+        coin.add(-1);
+        coin.add(1);
+        this.boardWidth = userBoard;
+        System.out.println("Creating a board...");
+        boardSize = boardWidth * boardWidth;
+        System.out.println("The board is " + boardSize + " squares");
 
-    public Board(final Integer size) {
-        if (size >= 5 & size <= 10){
-            this.BoardSize = size;
-        }else{
-            throw new ArithmeticException("Invalid board width: can only be between 5 and 10");
-        }
     }
 
-    public List<Integer> getWormholeEntrances() {
-        return wormholeEntrances;
+    /**
+     * returns board size.
+     *
+     * @return boardSize
+     */
+    public int getBoardSize() {
+        return boardSize;
     }
 
-    public List<Integer> getWormholeExits() {
+    /**
+     * @return returns array list of positive wormholes.
+     */
+    public ArrayList<Integer> getWormholeEntrancesPositive() {
+        return wormholeEntrancesP;
+    }
+
+    /**
+     * @return Reutrns array list of negative wormholes.
+     */
+    public ArrayList<Integer> getWormholeEntrancesNegative() {
+        return wormholeEntrancesN;
+    }
+
+    /**
+     * @return Array list of wormhole exits.
+     */
+    public ArrayList<Integer> getWormholeExits() {
         return wormholeExits;
     }
 
-    public void setWormholes() {
+    /**
+     * Generates wormholes.
+     */
 
-        /* initialise wormhole lists */
-
-        this.wormholeEntrances = new ArrayList<Integer>();
-        this.wormholeExits = new ArrayList<Integer>();
-
-        /* generate potenial positions */
-
-        List<Integer> BoardPosition = new ArrayList<Integer>();
-
-        for (int i = 2; i < (this.BoardSize * this.BoardSize); i++) {
-            BoardPosition.add(i);
+    public void wormholeGenerator() {
+        ArrayList<Integer> tempWormholeEntrances = new ArrayList<Integer>();
+        for (int i = 2; i < boardSize - 1; i++) {
+            tempWormholeEntrances.add(new Integer(i));
         }
-
-        Collections.shuffle(BoardPosition);
-
-        for (int i = 1; i < (this.BoardSize * 2); i = i + 2) {
-            this.wormholeEntrances.add(BoardPosition.get(i));
-            this.wormholeExits.add(BoardPosition.get(i + 1));
+        Collections.shuffle(tempWormholeEntrances);
+        if(boardWidth % 2 == 0) {
+            for (int i = 0; i < boardWidth/2 ; i++) {
+                wormholeEntrancesP.add(tempWormholeEntrances.get(i));
+                tempWormholeEntrances.remove(i);
+            }
+            for (int i = 0; i < boardWidth /2; i++) {
+                wormholeEntrancesN.add(tempWormholeEntrances.get(i));
+                tempWormholeEntrances.remove(i);
+            }
         }
-
-    }
-
-    public Integer getRandomExit() {
-        Double randomNumber = (Math.ceil(Math.random() * this.BoardSize - 1));
-        Integer randomExit = this.wormholeExits.get(randomNumber.intValue());
-        return randomExit;
-    }
-
-    public Integer getTotalPositions(){
-        return this.BoardSize * this.BoardSize;
-    }
-
-
-    public boolean isWormhole(final Integer position) {
-        if (getWormholeEntrances().contains(position)) {
-            return true;
+        if(boardWidth % 2 == 1) {
+            for (int i = 0; i < (boardWidth/2)+1; i++) {
+                wormholeEntrancesP.add(tempWormholeEntrances.get(i));
+                tempWormholeEntrances.remove(i);
+            }
+            for (int i = 0; i < boardWidth /2; i++) {
+                wormholeEntrancesN.add(tempWormholeEntrances.get(i));
+                tempWormholeEntrances.remove(i);
+            }
         }
-        return false;
+        for (int i = 0; i < boardWidth; i++) {
+            wormholeExits.add(tempWormholeEntrances.get(i));
+            tempWormholeEntrances.remove(i);
+        }
     }
 }
+
+
+
