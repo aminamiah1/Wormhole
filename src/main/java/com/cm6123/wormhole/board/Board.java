@@ -37,7 +37,7 @@ public class Board {
     /**
      * Randomises wormholes.
      */
-    private Random rdm = new Random();
+    private final Random rdm = new Random();
 
     /**
      * creates board.
@@ -45,8 +45,6 @@ public class Board {
      * @param userBoard
      */
     public Board(final int userBoard) {
-        coin.add(-1);
-        coin.add(1);
         this.boardWidth = userBoard;
         System.out.println("Creating a board...");
         boardSize = boardWidth * boardWidth;
@@ -121,7 +119,7 @@ public class Board {
     }
 
     /**
-     * manual board so I can enter a number for the positive and negative wormholes.
+     * manual board, so I can enter a number for the positive and negative wormholes.
      * @param wormholeNumber
      * @param exitNumber
      * @param isPositive

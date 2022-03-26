@@ -1,6 +1,6 @@
 package com.cm6123.wormhole.app;
 
-import com.cm6123.wormhole.Error.Error;
+import com.cm6123.wormhole.app.Error.Error;
 import com.cm6123.wormhole.board.Board;
 import com.cm6123.wormhole.player.Player;
 import org.slf4j.Logger;
@@ -19,7 +19,7 @@ public final class Application {
     private static final Logger LOGGER = LoggerFactory.getLogger(Application.class);
 
 
-    private Application() {
+    public Application() {
     }
 
     /**

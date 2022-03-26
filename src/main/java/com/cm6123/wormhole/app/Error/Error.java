@@ -1,4 +1,4 @@
-package com.cm6123.wormhole.Error;
+package com.cm6123.wormhole.app.Error;
 
 import java.util.Scanner;
 
