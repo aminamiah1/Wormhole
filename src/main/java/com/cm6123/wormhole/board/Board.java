@@ -66,21 +66,21 @@ public class Board {
     /**
      * @return returns array list of positive wormholes.
      */
-    public ArrayList<Integer> getWormholeEntrancesPositive() {
+    public ArrayList<Integer> setWormholeEntrancesPositive() {
         return wormholeEntrancesP;
     }
 
     /**
      * @return Reutrns array list of negative wormholes.
      */
-    public ArrayList<Integer> getWormholeEntrancesNegative() {
+    public ArrayList<Integer> setWormholeEntrancesNegative() {
         return wormholeEntrancesN;
     }
 
     /**
      * @return Array list of wormhole exits.
      */
-    public ArrayList<Integer> getWormholeExits() {
+    public ArrayList<Integer> setWormholeExits() {
         return wormholeExits;
     }
 
@@ -94,22 +94,22 @@ public class Board {
             tempWormholeEntrances.add(new Integer(i));
         }
         Collections.shuffle(tempWormholeEntrances);
-        if(boardWidth % 2 == 0) {
-            for (int i = 0; i < boardWidth/2 ; i++) {
+        if (boardWidth % 2 == 0) {
+            for (int i = 0; i < boardWidth / 2; i++) {
                 wormholeEntrancesP.add(tempWormholeEntrances.get(i));
                 tempWormholeEntrances.remove(i);
             }
-            for (int i = 0; i < boardWidth /2; i++) {
+            for (int i = 0; i < boardWidth / 2; i++) {
                 wormholeEntrancesN.add(tempWormholeEntrances.get(i));
                 tempWormholeEntrances.remove(i);
             }
         }
-        if(boardWidth % 2 == 1) {
-            for (int i = 0; i < (boardWidth/2)+1; i++) {
+        if (boardWidth % 2 == 1) {
+            for (int i = 0; i < (boardWidth / 2) + 1; i++) {
                 wormholeEntrancesP.add(tempWormholeEntrances.get(i));
                 tempWormholeEntrances.remove(i);
             }
-            for (int i = 0; i < boardWidth /2; i++) {
+            for (int i = 0; i < boardWidth / 2; i++) {
                 wormholeEntrancesN.add(tempWormholeEntrances.get(i));
                 tempWormholeEntrances.remove(i);
             }

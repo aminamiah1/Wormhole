@@ -100,14 +100,14 @@ task buildAndReport {
 pitest {
     targetClasses = ['com.cm6123.wormhole.*']  //by default "${project.group}.*"
     excludedClasses = ['com.cm6123.wormhole.app.*']
-    //pitestVersion = '1.4.1' //not needed when a default PIT version should be used
+    pitestVersion = '1.4.1' //not needed when a default PIT version should be used
     threads = 4
     outputFormats = ['XML', 'HTML']
     timestampedReports = false
     junit5PluginVersion = '0.15'
 }
 
-// check.dependsOn("pitest") //comment this line out if your build fails with the 'CoverageMinion' error.
+check.dependsOn("pitest") //comment this line out if your build fails with the 'CoverageMinion' error.
 
 
 rootProject.tasks.named("jar") {

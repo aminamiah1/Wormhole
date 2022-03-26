@@ -45,9 +45,9 @@ public final class Application {
             Board board = new Board(boardSize);
             if (boardSize > 4) {
                 board.wormholeGenerator();
-                System.out.println("\n ** Positive Wormhole entrances are: " + Arrays.asList(board.getWormholeEntrancesPositive()) + "**");
-                System.out.println("** Negative Wormhole entrances are: " + Arrays.asList(board.getWormholeEntrancesNegative()) + "**");
-                System.out.println("** Wormhole exits are: " + Arrays.asList(board.getWormholeExits()) + " **");
+                System.out.println("\n ** Positive Wormhole entrances are: " + Arrays.asList(board.setWormholeEntrancesPositive()) + "**");
+                System.out.println("** Negative Wormhole entrances are: " + Arrays.asList(board.setWormholeEntrancesNegative()) + "**");
+                System.out.println("** Wormhole exits are: " + Arrays.asList(board.setWormholeExits()) + " **");
             } else {
                 System.out.println("\n ** This board has no wormholes **");
             }
@@ -89,7 +89,5 @@ public final class Application {
         }
         while (playAgain);
         LOGGER.info("Application Closing");
-
-
     }
 }

@@ -95,38 +95,64 @@ public class Player {
         return "";
     }
 
-
     /**
-     * The player if they landed on a wormhole.
-     *
      * @param board
-     * @return
+     * @return checks if player lands on wormhole and teleports them.
      */
     public int wormholeChecker(final Board board) {
-        ArrayList<Integer> wormholeEntrances = board.getWormholeEntrancesPositive();
-        ArrayList<Integer> wormholeEntrances2 = board.getWormholeEntrancesNegative();
-        ArrayList<Integer> wormholeExits = board.getWormholeExits();
+        ArrayList<Integer> wormholeEntrancesP = board.setWormholeEntrancesPositive();
+        ArrayList<Integer> wormholeEntrancesN = board.setWormholeEntrancesNegative();
+        ArrayList<Integer> wormholeExits = board.setWormholeExits();
         Random random = new Random();
-        int randomIndex = random.nextInt(wormholeExits.size());
+        boolean exitExists = false;
+        boolean validExit = false;
 
-        if (wormholeEntrances.contains(boardPosition)) {
-            int playerExit = (wormholeExits.get(randomIndex));
-            do {
-                boardPosition = playerExit;
-                System.out.println(name + " landed on a POSITIVE wormhole!" + "\n" + name + " is now on " + playerExit);
+        if (wormholeEntrancesP.contains(boardPosition)) {
+            int posLow = boardPosition;
+            for (int i = board.getBoardSize(); i > posLow; i--) {
+                if (wormholeExits.contains(i)) {
+                    exitExists = true;
+                }
             }
-            while (playerExit > boardPosition);
-        }
+                if (exitExists) {
+                    while (validExit == false) {
+                        int newPos = wormholeExits.get(random.nextInt(wormholeExits.size()));
+                        if (newPos > posLow && wormholeExits.contains(newPos)) {
+                            boardPosition = newPos;
+                            System.out.println(name + " landed on a POSITIVE wormhole" + "\n"
+                                    + name + " You are now on square " + newPos);
+                            validExit = true;
+                        }
+                    }
+                } else {
+                    boardPosition = boardPosition;
+                    System.out.println("luckily, there are no exits above you :) ");
+                }
+            }
 
-        if (wormholeEntrances2.contains(boardPosition)) {
-            int playerExit = (wormholeExits.get(randomIndex));
-            do{
-                boardPosition = playerExit;
-                System.out.println(name + " landed on a NEGATIVE wormhole!" + "\n" + name + " is now on " + playerExit);
+        if (wormholeEntrancesN.contains(boardPosition)) {
+            int posHigh = boardPosition;
+            for (int i = 0; i < boardPosition; i++) {
+                if (wormholeExits.contains(i)) {
+                    exitExists = true;
+                }
             }
-            while (playerExit < boardPosition);
+            if (exitExists) {
+                while (validExit == false) {
+                    int newPos = wormholeExits.get(random.nextInt(wormholeExits.size()));
+                    if (newPos < posHigh && wormholeExits.contains(newPos)) {
+                        boardPosition = newPos;
+                        System.out.println(name + " landed on a NEGATIVE wormhole" + "\n"
+                                + name + " are now on square " + newPos);
+                        validExit = true;
+                    }
+                }
+            } else {
+                boardPosition = boardPosition;
+                System.out.println("luckily, there are no exits below you :) ");
+            }
         }
-        return playerExit;
+        return 0;
     }
 
     /**
@@ -150,15 +176,8 @@ public class Player {
     public int getBoardPosition() {
         return boardPosition;
     }
-
-    /**
-     * press enter to continue. nice feature.
-     */
-    public void responseWait() {
-        System.out.println("Press Enter to continue...");
-        sc.nextLine();
-    }
 }
+
 
 
 
