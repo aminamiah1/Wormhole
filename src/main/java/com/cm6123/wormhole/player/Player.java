@@ -96,6 +96,14 @@ public class Player {
     }
 
     /**
+     * @return checks if player won in tests.
+     */
+    public String checkifWon() {
+        System.out.println(name + " has won!");
+        return "";
+    }
+
+    /**
      * @param board
      * @return checks if player lands on wormhole and teleports them.
      */
@@ -114,21 +122,21 @@ public class Player {
                     exitExists = true;
                 }
             }
-                if (exitExists) {
-                    while (validExit == false) {
-                        int newPos = wormholeExits.get(random.nextInt(wormholeExits.size()));
-                        if (newPos > posLow && wormholeExits.contains(newPos)) {
-                            boardPosition = newPos;
-                            System.out.println(name + " landed on a POSITIVE wormhole" + "\n"
-                                    + name + " You are now on square " + newPos);
-                            validExit = true;
-                        }
+            if (exitExists) {
+                while (validExit == false) {
+                    int newPos = wormholeExits.get(random.nextInt(wormholeExits.size()));
+                    if (newPos > posLow && wormholeExits.contains(newPos)) {
+                        boardPosition = newPos;
+                        System.out.println(name + " landed on a POSITIVE wormhole" + "\n"
+                                + name + " is now on square " + newPos);
+                        validExit = true;
                     }
-                } else {
-                    boardPosition = boardPosition;
-                    System.out.println("luckily, there are no exits above you :) ");
                 }
+            } else {
+                boardPosition = boardPosition;
+                System.out.println("luckily, there are no exits above you :) ");
             }
+        }
 
         if (wormholeEntrancesN.contains(boardPosition)) {
             int posHigh = boardPosition;
@@ -143,7 +151,7 @@ public class Player {
                     if (newPos < posHigh && wormholeExits.contains(newPos)) {
                         boardPosition = newPos;
                         System.out.println(name + " landed on a NEGATIVE wormhole" + "\n"
-                                + name + " are now on square " + newPos);
+                                + name + " is now on square " + newPos);
                         validExit = true;
                     }
                 }
@@ -161,6 +169,14 @@ public class Player {
      */
     public Boolean checkIfWon(final int boardSize) {
         return boardPosition >= boardSize;
+    }
+
+    /**
+     * @param boardSize
+     * @return checks if player won in tests.
+     */
+    public String checkifWon(final int boardSize) {
+        return checkifWon();
     }
 
     /**

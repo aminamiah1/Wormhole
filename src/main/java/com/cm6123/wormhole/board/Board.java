@@ -119,6 +119,24 @@ public class Board {
             tempWormholeEntrances.remove(i);
         }
     }
+
+    /**
+     * manual board so I can enter a number for the positive and negative wormholes.
+     * @param wormholeNumber
+     * @param exitNumber
+     * @param isPositive
+     */
+    public void manualWormholeGenerator(final int wormholeNumber, final int exitNumber, final boolean isPositive) {
+        // Way to manually create wormholes.
+        ArrayList<Integer> tempWormholeEntrances = new ArrayList<Integer>();
+        if (isPositive) {
+            wormholeEntrancesP.add(wormholeNumber);
+        } else {
+            wormholeEntrancesN.add(wormholeNumber);
+        }
+        wormholeExits.add(exitNumber);
+
+    }
 }
 
 
