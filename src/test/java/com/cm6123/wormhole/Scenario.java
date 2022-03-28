@@ -118,13 +118,13 @@ public class Scenario {
         soumya.checkifWon();
     }
 
-    @Test //Video Test
-    public void shouldMoveToSpace20ForWormholeOn7() {
-        Board testBoard = new Board(5);
-        testBoard.manualWormholeGenerator(7, 20, true);
-        Player robin = new Player("Robin", true);
-        robin.manRollDice(5, 1);
-        robin.wormholeChecker(testBoard);
-        assertEquals(20, robin.getBoardPosition());
+    @Test
+    public void shouldMoveToSpaceForWormholeOn7(){
+        Board board = new Board(5);
+        board.manualWormholeGenerator(7, 20, true);
+        Player carl = new Player("Carl", true);
+        carl.manRollDice(5,1);
+        carl.wormholeChecker(board);
+        assertEquals(20, carl.getBoardPosition());
     }
 }

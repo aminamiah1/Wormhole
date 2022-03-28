@@ -5,7 +5,7 @@ public class Dice {
   /**
    * The number of faces on this dice.
    */
-  private Integer faces;
+  private final Integer faces;
 
   /**
    * Construct a dice with the given number of faces.

@@ -18,7 +18,9 @@ public final class Application {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(Application.class);
 
-
+    /**
+     * makes application public.
+     */
     public Application() {
     }
 
