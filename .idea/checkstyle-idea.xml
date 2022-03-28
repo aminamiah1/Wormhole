@@ -3,6 +3,8 @@
   <component name="CheckStyle-IDEA">
     <option name="configuration">
       <map>
+        <entry key="active-configuration"
+               value="PROJECT_RELATIVE:$PROJECT_DIR$/config/checkstyle/checkstyleMain.xml:Wormhole Rules" />
         <entry key="checkstyle-version" value="8.29" />
         <entry key="copy-libs" value="true" />
         <entry key="location-0" value="BUNDLED:(bundled):Sun Checks" />
