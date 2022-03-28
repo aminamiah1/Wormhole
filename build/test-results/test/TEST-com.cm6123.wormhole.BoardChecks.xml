@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.cm6123.wormhole.BoardChecks" tests="3" skipped="0" failures="0" errors="0" timestamp="2022-03-28T00:11:09" hostname="NSAF47B090A989E" time="0.07">
+  <properties/>
+  <testcase name="ExitsGenerator()" classname="com.cm6123.wormhole.BoardChecks" time="0.065"/>
+  <testcase name="createBoard()" classname="com.cm6123.wormhole.BoardChecks" time="0.001"/>
+  <testcase name="WormholesGenerator()" classname="com.cm6123.wormhole.BoardChecks" time="0.002"/>
+  <system-out><![CDATA[Creating a board...
+The board is 25 squares
+Creating a board...
+The board is 49 squares
+Creating a board...
+The board is 25 squares
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
